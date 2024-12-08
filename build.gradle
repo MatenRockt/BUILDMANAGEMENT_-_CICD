@@ -1,8 +1,26 @@
-task hello { // Aufgabe
-  doLast {
-    println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt'
-  }
+
+tasks.register('taskA') {
+    doLast {
+        println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt.'
+        println 'Task A wurde ausgefuehrt.'
+    }
 }
+
+tasks.register('taskB') {
+    dependsOn 'taskA' // Task B hängt von Task A ab
+    doLast {
+        println 'Task B wird ausgefuehrt. Task B hängt von Task A ab'
+    }
+}
+
+tasks.register('taskC') {
+    dependsOn 'taschenrechner' // Task C hängt von Task taschenrechner ab
+    doLast {
+        println 'Taschenrechner beendet.'
+        println 'Task C wird ausgefuehrt.Task C hängt von Task Taschenrechner ab'
+    }
+}
+
 
 task taschenrechner {
     dependsOn 'taskB'
@@ -65,27 +83,5 @@ void berechne(def scanner, String operation, def funktion) {
         }
     } catch (NumberFormatException e) {
         println "Ungültige Eingabe! Bitte geben Sie gültige Ganzzahlen ein."
-    }
-}
-
-tasks.register('taskA') {
-    doLast {
-        println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt.'
-        println 'Task A wurde ausgefuehrt.'
-    }
-}
-
-tasks.register('taskB') {
-    dependsOn 'taskA' // Task B hängt von Task A ab
-    doLast {
-        println 'Task B wird ausgefuehrt. Task B hängt von Task A ab'
-    }
-}
-
-tasks.register('taskC') {
-    dependsOn 'taschenrechner' // Task C hängt von Task taschenrechner ab
-    doLast {
-        println 'Taschenrechner beendet.'
-        println 'Task C wird ausgefuehrt.Task C hängt von Task Taschenrechner ab'
     }
 }
