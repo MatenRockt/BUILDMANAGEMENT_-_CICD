@@ -1,0 +1,91 @@
+task hello { // Aufgabe
+  doLast {
+    println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt'
+  }
+}
+
+task taschenrechner {
+    dependsOn 'taskB'
+    doLast {
+        // Scanner für Eingaben
+        def scanner = new Scanner(System.in)
+
+        // Menü anzeigen
+        println "Bitte wählen Sie eine der folgenden Optionen:"
+        println "1. Addiere zwei Zahlen"
+        println "2. Subtrahiere zwei Zahlen"
+        println "3. Multipliziere zwei Zahlen"
+        println "4. Dividiere zwei Zahlen"
+        println"Bitte eine Auswahl treffen (1-4): "
+
+        // Auswahl einlesen
+        def auswahl = scanner.nextLine()
+
+        // Basierend auf der Auswahl eine Aktion ausführen
+        switch (auswahl) {
+            case "1":
+                berechne(scanner, "addition", { a, b -> a + b })
+                break
+            case "2":
+                berechne(scanner, "subtraktion", { a, b -> a - b })
+                break
+            case "3":
+
+
+                berechne(scanner, "multiplikation", { a, b -> a * b })
+                break
+            case "4":
+                berechne(scanner, "division", { a, b -> 
+                    if (b == 0) {
+                        println "Fehler: Division durch Null ist nicht erlaubt!"
+                        return null
+                    } 
+                    a / b 
+                })
+                break
+            default:
+                println "Ungültige Auswahl! Bitte wählen Sie eine Zahl zwischen 1 und 4."
+        }
+    }
+}
+
+// Hilfsmethode für Berechnungen
+void berechne(def scanner, String operation, def funktion) {
+    println "Bitte geben Sie die erste Zahl ein: "
+    def zahl1 = scanner.nextLine()
+    println "Bitte geben Sie die zweite Zahl ein: "
+    def zahl2 = scanner.nextLine()
+
+    try {
+        def a = zahl1.toInteger()
+        def b = zahl2.toInteger()
+        def ergebnis = funktion(a, b)
+        if (ergebnis != null) {
+            println "Das Ergebnis der ${operation} ist: ${ergebnis}"
+        }
+    } catch (NumberFormatException e) {
+        println "Ungültige Eingabe! Bitte geben Sie gültige Ganzzahlen ein."
+    }
+}
+
+tasks.register('taskA') {
+    doLast {
+        println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt.'
+        println 'Task A wurde ausgefuehrt.'
+    }
+}
+
+tasks.register('taskB') {
+    dependsOn 'taskA' // Task B hängt von Task A ab
+    doLast {
+        println 'Task B wird ausgefuehrt. Task B hängt von Task A ab'
+    }
+}
+
+tasks.register('taskC') {
+    dependsOn 'taschenrechner' // Task C hängt von Task taschenrechner ab
+    doLast {
+        println 'Taschenrechner beendet.'
+        println 'Task C wird ausgefuehrt.Task C hängt von Task Taschenrechner ab'
+    }
+}
