@@ -17,7 +17,7 @@ tasks.register('taskC') {
     dependsOn 'taschenrechner' // Task C hängt von Task taschenrechner ab
     doLast {
         println 'Taschenrechner beendet.'
-        println 'Task C wird ausgefuehrt.Task C hängt von Task Taschenrechner ab'
+        println 'Task C wird ausgefuehrt.Task C haengt von Task Taschenrechner ab'
     }
 }
 
@@ -29,7 +29,7 @@ task taschenrechner {
         def scanner = new Scanner(System.in)
 
         // Menü anzeigen
-        println "Bitte wählen Sie eine der folgenden Optionen:"
+        println "Bitte waehlen Sie eine der folgenden Optionen:"
         println "1. Addiere zwei Zahlen"
         println "2. Subtrahiere zwei Zahlen"
         println "3. Multipliziere zwei Zahlen"
@@ -62,7 +62,7 @@ task taschenrechner {
                 })
                 break
             default:
-                println "Ungültige Auswahl! Bitte wählen Sie eine Zahl zwischen 1 und 4."
+                println "Ungueltige Auswahl! Bitte waehlen Sie eine Zahl zwischen 1 und 4."
         }
     }
 }
@@ -82,6 +82,6 @@ void berechne(def scanner, String operation, def funktion) {
             println "Das Ergebnis der ${operation} ist: ${ergebnis}"
         }
     } catch (NumberFormatException e) {
-        println "Ungültige Eingabe! Bitte geben Sie gültige Ganzzahlen ein."
+        println "Ungueltige Eingabe! Bitte geben Sie gueltige Ganzzahlen ein."
     }
 }
