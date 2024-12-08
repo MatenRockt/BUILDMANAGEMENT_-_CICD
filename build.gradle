@@ -1,4 +1,3 @@
-// hier kommt eine Änderung für CICD!
 task taskA {
     doLast {
         println 'Hallo Herr Edlich dies ist meine Abgabe! ich habe einen Taschnrechner erstellt.'
