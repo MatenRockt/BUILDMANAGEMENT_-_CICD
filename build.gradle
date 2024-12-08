@@ -1,19 +1,19 @@
-
-tasks.register('taskA') {
+// hier kommt eine Änderung für CICD
+task taskA {
     doLast {
-        println 'Hallo Herr Edlich dies ist meine Abgabe!, ich habe einen Taschnrechner damit erstellt.'
+        println 'Hallo Herr Edlich dies ist meine Abgabe! ich habe einen Taschnrechner erstellt.'
         println 'Task A wurde ausgefuehrt.'
     }
 }
 
-tasks.register('taskB') {
+task taskB {
     dependsOn 'taskA' // Task B hängt von Task A ab
     doLast {
         println 'Task B wird ausgefuehrt. Task B hängt von Task A ab'
     }
 }
 
-tasks.register('taskC') {
+task taskC {
     dependsOn 'taschenrechner' // Task C hängt von Task taschenrechner ab
     doLast {
         println 'Taschenrechner beendet.'
